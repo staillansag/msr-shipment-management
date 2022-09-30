@@ -1,0 +1,1 @@
+docker run --name msr-shipment-management -dp 35556:5555 --network sag --env-file env_file staillansag/msr-shipment-management:latest
