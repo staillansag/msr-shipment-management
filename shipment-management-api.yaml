@@ -1,0 +1,95 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "ShipmentsAPI"
+host: "localhost:35555"
+basePath: "/shipment-management"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /shipments:
+    get:
+      operationId: "getShipments"
+      parameters:
+      - name: "orderId"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "status"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "dateFrom"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "dateUntil"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/GetShipments_response"
+        "401":
+          description: "Access Denied"
+definitions:
+  Shipment:
+    required:
+    - "amount"
+    - "currencyCode"
+    - "date"
+    - "deliveryPartnerId"
+    - "deliveryPartnerReference"
+    - "id"
+    - "orderId"
+    - "productCondition"
+    - "productId"
+    - "productName"
+    - "productSeller"
+    - "registeredClaim"
+    - "returnUntilDate"
+    - "status"
+    properties:
+      id:
+        type: "string"
+      orderId:
+        type: "string"
+      date:
+        type: "string"
+      status:
+        type: "string"
+      productId:
+        type: "string"
+      productName:
+        type: "string"
+      productSeller:
+        type: "string"
+      returnUntilDate:
+        type: "string"
+      currencyCode:
+        type: "string"
+      amount:
+        type: "number"
+      productCondition:
+        type: "string"
+      deliveryPartnerId:
+        type: "string"
+      deliveryPartnerReference:
+        type: "string"
+      registeredClaim:
+        type: "boolean"
+  GetShipments_response:
+    required:
+    - "shipments"
+    properties:
+      shipments:
+        type: "array"
+        items:
+          $ref: "#/definitions/Shipment"
